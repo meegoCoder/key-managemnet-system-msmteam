@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSM TEAM - Key Management</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">MSM TEAM</div>
+      <div class="nav-search">
+        <a href="#" class="nav-link">HOME</a>
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search...">
+          <button class="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <a href="home.html" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="stat-item">
+          <span>Total: 8</span>
+        </div>
+        <div class="stat-item">
+          <span>Available: 6</span>
+        </div>
+        <div class="stat-item active">
+          <i class="fas fa-circle"></i>
+          <span>All</span>
+        </div>
+      </div>
+
+      <!-- Keys Grid -->
+      <div class="keys-grid">
+        <div class="key-item available">
+          <span>KY21</span>
+        </div>
+        <div class="key-item available">
+          <span>KY22</span>
+        </div>
+        <div class="key-item available">
+          <span>KY23</span>
+        </div>
+        <div class="key-item available">
+          <span>KY24</span>
+          <i class="fas fa-key"></i>
+        </div>
+        <div class="key-item available">
+          <span>KY25</span>
+          <i class="fas fa-key"></i>
+        </div>
+        <div class="key-item unavailable">
+          <span>KY26</span>
+          <i class="fas fa-key"></i>
+        </div>
+        <div class="key-item unavailable">
+          <span>KY27</span>
+          <i class="fas fa-key"></i>
+        </div>
+        <div class="key-item available">
+          <span>KY28</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="delete-key" onclick="showDeleteModal()">
+          <i class="fas fa-trash"></i>
+          Delete Key
+        </button>
+        <button class="add-key" onclick="showAddModal()">
+          <i class="fas fa-plus"></i>
+          Add Key
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Key Modal -->
+  <div class="modal" id="addKeyModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('addKeyModal')">&times;</span>
+      <h2 class="modal-title">CREATE NEW KEY</h2>
+      <div class="form-group">
+        <label>Key ID:</label>
+        <input type="text" placeholder="eg: KYXX">
+      </div>
+      <div class="form-group">
+        <label>House Number:</label>
+        <input type="text" placeholder="eg: A-XX-XX">
+      </div>
+      <div class="form-group">
+        <label>House Address:</label>
+        <input type="text" placeholder="eg: Legasi Residensi">
+      </div>
+      <div class="modal-buttons">
+        <button class="cancel-btn" onclick="closeModal('addKeyModal')">Cancel</button>
+        <button class="confirm-btn">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Key Modal -->
+  <div class="modal" id="deleteKeyModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('deleteKeyModal')">&times;</span>
+      <h2 class="modal-title">DELETE KEY</h2>
+      <div class="key-item" style="width: 100px; margin: 20px auto;">
+        <span>KY27</span>
+      </div>
+      <div class="form-group">
+        <label>Key ID:</label>
+        <input type="text" value="KY27" readonly>
+      </div>
+      <div class="form-group">
+        <label>House Number:</label>
+        <input type="text" value="A-27-18" readonly>
+      </div>
+      <div class="form-group">
+        <label>House Address:</label>
+        <input type="text" value="Legasi Residensi" readonly>
+      </div>
+      <div class="modal-buttons">
+        <button class="cancel-btn" onclick="closeModal('deleteKeyModal')">Cancel</button>
+        <button class="confirm-btn" style="background-color: #ff4444;">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showAddModal() {
+      document.getElementById('addKeyModal').classList.add('active');
+    }
+
+    function showDeleteModal() {
+      document.getElementById('deleteKeyModal').classList.add('active');
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>

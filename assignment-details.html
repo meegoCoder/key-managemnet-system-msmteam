@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment Details - Hotel Key Management System</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/assignment.css">
+</head>
+<body class="dashboard-page">
+  <nav class="top-nav">
+    <div class="logo-container">
+      <span>MSM TEAM</span>
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="Search...">
+      <button type="button" class="search-btn">
+        <span class="icon-search"></span>
+      </button>
+    </div>
+    <div class="user-info">
+          <span id="user-name">AMEERUL HAQEEM AZLEE</span>
+          <span id="user-contact">+60 1234 5678 / meegoazlee@gmail.com</span>
+        </div>
+        <div class="profile-icon">
+          <img src="https://cdn.uitm.edu.my/gambar_warga/738727a4ca9f7136c4e60e064940bac9.png" alt="Profile">
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for...">
+          <button class="search-btn">🔍</button>
+        </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo">
+          <h1>AH</h1>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li class="active"><a href="#" title="Home"><span class="icon">🏠</span></a></li>
+            <li><a href="#" title="Notifications"><span class="icon">🔔</span></a></li>
+            <li><a href="#" title="Settings"><span class="icon">⚙️</span></a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="user-avatar">
+          <span>👤</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="main-content">
+      <div class="assignment-header">
+        <h1>Assignment Tasks</h1>
+        <div class="assignment-controls">
+          <div class="date-selector">
+            <label for="assignmentDate">Date:</label>
+            <select id="assignmentDate">
+              <option value="today" selected>Today</option>
+              <option value="tomorrow">Tomorrow</option>
+              <option value="week">This Week</option>
+            </select>
+          </div>
+          <button id="refreshBtn" class="btn btn-primary">
+            <span class="icon-refresh"></span> Refresh
+          </button>
+        </div>
+      </div>
+
+      <div class="assignment-tabs">
+        <button class="assignment-tab-btn active" data-tab="assigned">
+          ASSIGNED
+          <span class="notification-badge">3</span>
+        </button>
+        <button class="assignment-tab-btn" data-tab="done">DONE</button>
+      </div>
+
+      <div class="assignment-content active" id="assigned-content">
+        <div class="assignment-list">
+          <div class="assignment-item">
+            <div class="assignment-info">
+              <h3>Room 205 - Inspection</h3>
+              <p class="assignment-time">Assigned: 09:30 AM</p>
+              <p class="assignment-description">Check room condition and cleanliness</p>
+            </div>
+            <div class="assignment-status">
+              <span class="status-pending">Pending for Checking</span>
+              <div class="assignment-actions">
+                <button class="btn btn-success">Mark as Done</button>
+                <button class="btn btn-primary">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="assignment-item">
+            <div class="assignment-info">
+              <h3>Room 310 - Maintenance</h3>
+              <p class="assignment-time">Assigned: 10:15 AM</p>
+              <p class="assignment-description">Fix broken sink in bathroom</p>
+            </div>
+            <div class="assignment-status">
+              <span class="status-pending">Pending for Checking</span>
+              <div class="assignment-actions">
+                <button class="btn btn-success">Mark as Done</button>
+                <button class="btn btn-primary">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="assignment-item">
+            <div class="assignment-info">
+              <h3>Room 127 - Inspection</h3>
+              <p class="assignment-time">Assigned: 11:00 AM</p>
+              <p class="assignment-description">Verify all amenities are present</p>
+            </div>
+            <div class="assignment-status">
+              <span class="status-pending">Pending for Checking</span>
+              <div class="assignment-actions">
+                <button class="btn btn-success">Mark as Done</button>
+                <button class="btn btn-primary">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="assignment-content" id="done-content">
+        <div class="assignment-list">
+          <div class="assignment-item">
+            <div class="assignment-info">
+              <h3>Room 101 - Inspection</h3>
+              <p class="assignment-time">Completed: 09:45 AM</p>
+              <p class="assignment-description">Checked room condition and cleanliness</p>
+            </div>
+            <div class="assignment-status">
+              <span class="status-completed">Completed</span>
+              <div class="assignment-actions">
+                <button class="btn btn-primary">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="assignment-item">
+            <div class="assignment-info">
+              <h3>Room 215 - Maintenance</h3>
+              <p class="assignment-time">Completed: 10:30 AM</p>
+              <p class="assignment-description">Replaced light bulbs</p>
+            </div>
+            <div class="assignment-status">
+              <span class="status-completed">Completed</span>
+              <div class="assignment-actions">
+                <button class="btn btn-primary">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script src="js/assignment.js"></script>
+</body>
+</html>

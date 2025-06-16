@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 80px 1fr;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .home-btn {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: rgba(255, 165, 0, 0.8);
+        }
+        
+        .system-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            margin-left: -5px;
+            cursor: pointer;
+        }
+        
+        /* Sidebar Styles */
+        aside {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgb(120, 120, 120);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h2 {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 10px;
+            color: rgb(255, 165, 0);
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: rgb(255, 165, 0);
+            border-left: 4px solid rgb(255, 165, 0);
+        }
+        
+        /* Main Content Styles */
+        main {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-card i {
+            font-size: 40px;
+            color: rgb(255, 165, 0);
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .dashboard-card p {
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search keys, staff, or guests...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="#"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="#"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="#"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="#"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="#"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="#"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <h1 style="color: rgb(255, 165, 0); margin-bottom: 20px;">Dashboard</h1>
+        <div class="dashboard">
+            <div class="dashboard-card">
+                <i class="fas fa-home"></i>
+                <h3>Register House</h3>
+                <p>Add new houses to the system and manage existing ones</p>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-user"></i>
+                <h3>Register Guest</h3>
+                <p>Register and manage guest information</p>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-key"></i>
+                <h3>Key Management</h3>
+                <p>Track and manage all house keys in the system</p>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-tasks"></i>
+                <h3>Assignment</h3>
+                <p>Assign keys to staff members and track assignments</p>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-tools"></i>
+                <h3>Maintenance</h3>
+                <p>Manage key maintenance and replacement</p>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-clipboard-check"></i>
+                <h3>Inspection</h3>
+                <p>Conduct key inspections and audits</p>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Report</h3>
+                <p>Generate reports on key usage and assignments</p>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-user-cog"></i>
+                <h3>Account Management</h3>
+                <p>Manage user accounts and permissions</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

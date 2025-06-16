@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervisor Dashboard - Hotel Key Management System</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo">
+          <h1>AH</h1>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li class="active"><a href="#" title="Home"><span class="icon">🏠</span></a></li>
+            <li><a href="#" title="Notifications"><span class="icon">🔔</span></a></li>
+            <li><a href="#" title="Settings"><span class="icon">⚙️</span></a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="user-avatar">
+          <span>👤</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Top Navigation Bar -->
+      <header class="top-nav">
+        <div class="hamburger-menu">
+          <span>☰</span>
+        </div>
+        <div class="branding">
+          <h2>MSM TEAM</h2>
+        </div>
+        <div class="user-info">
+          <span id="user-name">AMEERUL HAQEEM AZLEE</span>
+          <span id="user-contact">+60 1234 5678 / meegoazlee@gmail.com</span>
+        </div>
+        <div class="profile-icon">
+          <img src="https://cdn.uitm.edu.my/gambar_warga/738727a4ca9f7136c4e60e064940bac9.png" alt="Profile">
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for...">
+          <button class="search-btn">🔍</button>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <h1>Dashboard</h1>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="card">CARD</button>
+          <button class="tab-btn" data-tab="key-history">KEY HISTORY</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="card" class="tab-content active">
+          <div class="card-grid">
+            <!-- Row 1 -->
+            <div class="function-card">
+              <h3 class="tilted-text">Register Guest</h3>
+              <a href="register-guest.html">
+              <button class="btn btn-green">Click Here</button>
+              </a>
+            </div>
+
+            <div class="function-card">
+              <h3 class="tilted-text">Key Management</h3>
+              <a href="key-management.html">
+              <button class="btn btn-green">Click Here</button>
+              </a>
+            </div>
+
+            <div class="function-card">
+              <h3 class="tilted-text">Assignment</h3>
+              <a href="assignment-details.html">
+              <button class="btn btn-green">Click Here</button>
+              </a>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="function-card">
+              <h3 class="tilted-text">Inspection</h3>
+              <a href="inspection.html">
+              <button class="btn btn-green">Click Here</button>
+              </a>
+            </div>
+
+            <div class="function-card">
+              <h3 class="tilted-text">Maintenance</h3>
+              <a href="maintenance.html">
+              <button class="btn btn-green">Click Here</button>
+              </a>
+            </div>
+
+            <div class="function-card">
+              <h3 class="tilted-text">Report</h3>
+              <a href="report.html">
+              <button class="btn btn-green">Click Here</button>
+              </a>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="function-card">
+              <h3 class="tilted-text">Account Management</h3>
+              <a href="account-management.html">
+              <button class="btn btn-green">Click Here</button>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div id="key-history" class="tab-content">
+          <div class="key-history-container">
+            <h2>Key History</h2>
+            <div class="key-history-filters">
+              <div class="filter-group">
+                <label for="date-filter">Date Range:</label>
+                <select id="date-filter">
+                  <option>Today</option>
+                  <option>This Week</option>
+                  <option>This Month</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="status-filter">Status:</label>
+                <select id="status-filter">
+                  <option>All</option>
+                  <option>Available</option>
+                  <option>Occupied</option>
+                </select>
+              </div>
+              <button class="btn btn-primary">Filter</button>
+            </div>
+            <div class="key-history-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Key ID</th>
+                    <th>Room No.</th>
+                    <th>Guest Name</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>K-001</td>
+                    <td>101</td>
+                    <td>John Smith</td>
+                    <td>2025-01-01</td>
+                    <td>2025-01-05</td>
+                    <td><span class="status occupied">Occupied</span></td>
+                  </tr>
+                  <tr>
+                    <td>K-002</td>
+                    <td>102</td>
+                    <td>Jane Doe</td>
+                    <td>2025-01-02</td>
+                    <td>2025-01-07</td>
+                    <td><span class="status occupied">Occupied</span></td>
+                  </tr>
+                  <tr>
+                    <td>K-003</td>
+                    <td>103</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="status available">Available</span></td>
+                  </tr>
+                  <tr>
+                    <td>K-004</td>
+                    <td>104</td>
+                    <td>Robert Johnson</td>
+                    <td>2025-01-03</td>
+                    <td>2025-01-04</td>
+                    <td><span class="status occupied">Occupied</span></td>
+                  </tr>
+                  <tr>
+                    <td>K-005</td>
+                    <td>105</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="status available">Available</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script src="js/supervisor.js"></script>
+</body>
+</html>

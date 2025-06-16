@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MSM Team</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f1f3;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #444;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      background-color: #f9955c;
+      padding: 5px 15px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    .nav input {
+      padding: 5px;
+    }
+
+    .container {
+      padding: 30px;
+      display: flex;
+      gap: 30px;
+    }
+
+    .left-panel, .report-box, .key-grid {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .left-panel {
+      width: 200px;
+    }
+
+    .left-panel div {
+      background-color: #f1f1f1;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .report-box {
+      flex: 1;
+      color: black;
+    }
+
+    .report-box h3 {
+      text-align: center;
+      color: #f9955c;
+    }
+
+    .report-box table {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .report-box th, .report-box td {
+      text-align: left;
+      padding: 5px;
+    }
+
+    .back-btn {
+      margin: 20px 30px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .key-button {
+      background-color: #f9955c;
+      border: none;
+      padding: 15px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .note {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">MSM TEAM</div>
+    <div class="nav">
+      <a href="#">HOME</a>
+      <input type="text" placeholder="Search...">
+    </div>
+  </header>
+
+  <div class="back-btn">&#8592;</div>
+
+  <div class="container">
+    <div class="left-panel">
+      <div>Report ID: RP7821</div>
+      <div>Report Name: Key Usage</div>
+      <div>Key ID: KY21</div>
+    </div>
+
+    <div class="report-box">
+      <h3>Report Details</h3>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Info</th>
+        </tr>
+        <tr>
+          <td>12/2/23</td>
+          <td>Guest Checked Out</td>
+        </tr>
+        <tr>
+          <td>13/2/23</td>
+          <td>Key Assigned to Inspector</td>
+        </tr>
+        <tr>
+          <td>15/2/23</td>
+          <td>Key Assigned to Maintenance Staff</td>
+        </tr>
+      </table>
+      <br>
+      <strong>Staff In Charge</strong>
+      <ul>
+        <li>Fazura Binti Hashim, EL420</li>
+        <li>Anas Bin Mikalil, EL372</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="back-btn">&#8592;</div>
+
+  <div class="container">
+    <div class="key-grid">
+      <button class="key-button">KY21</button>
+      <button class="key-button">KY24</button>
+      <button class="key-button">KY27</button>
+      <button class="key-button">KY22</button>
+      <button class="key-button">KY25</button>
+      <button class="key-button">KY28</button>
+      <button class="key-button">KY23</button>
+      <button class="key-button">KY26</button>
+      <button class="key-button">KY29</button>
+    </div>
+  </div>
+  <div class="note" style="margin-left: 30px;">*Click key button to view report</div>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+/* Assignment Page Styles */
+.assignment-container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.assignment-header {
+  background-color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  height: 60px;
+  position: relative;
+  z-index: 1000;
+}
+
+.logo-section {
+  background-color: var(--primary-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo-section h2 {
+  color: var(--white);
+  margin: 0;
+}
+
+.nav-section {
+  display: flex;
+  align-items: center;
+}
+
+.home-link {
+  color: var(--white);
+  font-weight: 600;
+  margin-right: var(--spacing-lg);
+}
+
+/* Assignment Content */
+.assignment-content {
+  flex: 1;
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Back Button */
+.back-button {
+  margin-bottom: var(--spacing-lg);
+}
+
+.back-button a {
+  font-size: var(--font-size-xxl);
+  color: var(--text-color);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color var(--transition-speed);
+}
+
+.back-button a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Tabs */
+.assignment-tabs {
+  display: flex;
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 2px solid var(--border-color);
+  background-color: #fff;
+  padding-left: var(--spacing-lg);
+  margin-left: 60px; /* Adjust this to align with your content/sidebar */
+}
+
+.assignment-tab-btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: none;
+  border: none;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  color: var(--text-color);
+  background-color: transparent;
+  transition: all 0.2s ease;
+  border-radius: var(--border-radius-sm);
+  margin-right: var(--spacing-md);
+}
+
+.assignment-tab-btn:hover {
+  background-color: rgba(255, 123, 46, 0.1);
+}
+
+.assignment-tab-btn.active {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.assignment-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+
+.assignment-tab-btn .notification-badge {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+/* Tab Content */
+.assignment-tab-content {
+  display: none;
+}
+
+.assignment-tab-content.active {
+  display: block;
+}
+
+/* Date Filter */
+.date-filter {
+  position: relative;
+  width: 300px;
+  margin-bottom: var(--spacing-lg);
+  margin-left: auto;
+}
+
+.date-filter select {
+  appearance: none;
+  background-color: var(--white);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+  pointer-events: none;
+}
+
+/* Assignment List */
+.assignment-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.assignment-item {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.assignment-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-md);
+  font-size: var(--font-size-xl);
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.assignment-details {
+  flex: 1;
+}
+
+.assignment-details h3 {
+  margin: 0 0 6px 0;
+  font-size: var(--font-size-md);
+}
+
+.assignment-details p {
+  margin: 0;
+  color: var(--dark-gray);
+  font-size: var(--font-size-sm);
+}
+
+.assignment-status {
+  margin-left: var(--spacing-md);
+  white-space: nowrap;
+}
+
+.pending-status {
+  color: var(--error-color);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.completed-status {
+  color: var(--success-color);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+/* Refresh Button */
+.refresh-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--spacing-lg);
+}
+
+.refresh-btn {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.refresh-btn:hover {
+  background-color: #e67e3a;
+  transform: translateY(-2px);
+}
+
+.refresh-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .assignment-header {
+    flex-direction: column;
+    height: auto;
+    padding: var(--spacing-sm);
+  }
+  
+  .logo-section {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .nav-section {
+    width: 100%;
+    justify-content: space-between;
+    padding: var(--spacing-sm);
+  }
+  
+  .assignment-content {
+    padding: var(--spacing-md);
+  }
+  
+  .date-filter {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .assignment-tabs {
+    padding-left: var(--spacing-md);
+    margin-left: 0;
+  }
+  
+  .assignment-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .assignment-icon {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .assignment-status {
+    margin-left: 0;
+    margin-top: var(--spacing-sm);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .assignment-content {
+    padding: var(--spacing-md);
+  }
+}
