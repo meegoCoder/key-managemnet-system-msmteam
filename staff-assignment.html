@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Assignments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 80px 1fr;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .home-btn {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: rgba(255, 165, 0, 0.8);
+        }
+        
+        .system-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            margin-left: -5px;
+            cursor: pointer;
+        }
+        
+        /* Sidebar Styles */
+        aside {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgb(120, 120, 120);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h2 {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 10px;
+            color: rgb(255, 165, 0);
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: rgb(255, 165, 0);
+            border-left: 4px solid rgb(255, 165, 0);
+        }
+        
+        /* Main Content Styles */
+        main {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        /* Assignments Page Styles */
+        .assignments-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            color: rgb(255, 165, 0);
+            font-size: 24px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .tab.active {
+            color: rgb(255, 165, 0);
+            border-bottom: 3px solid rgb(255, 165, 0);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Assignments Table */
+        .assignments-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .assignments-table th, 
+        .assignments-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .assignments-table th {
+            background-color: rgb(90, 90, 90);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .assignments-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff7e6;
+            color: #fa8c16;
+        }
+        
+        .status-in-progress {
+            background-color: #e6f7ff;
+            color: #1890ff;
+        }
+        
+        .status-completed {
+            background-color: #e6f7ee;
+            color: #00a854;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .start-btn {
+            background-color: #e6f7ff;
+            color: #1890ff;
+        }
+        
+        .complete-btn {
+            background-color: #e6f7ee;
+            color: #00a854;
+        }
+        
+        /* Assignment Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 600px;
+            max-width: 90%;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            color: rgb(255, 165, 0);
+            font-size: 20px;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+            width: 150px;
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .update-status {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .status-select {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+        
+        .notes-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+            min-height: 80px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search assignments...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-key"></i> Key View</a></li>
+            <li><a href="#" class="active"><i class="fas fa-tasks"></i> Assignments</a></li>
+            <li><a href="#"><i class="fas fa-user-cog"></i> Account</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="assignments-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-tasks"></i> My Assignments</h1>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="openTab(event, 'current-tab')">Current</div>
+                <div class="tab" onclick="openTab(event, 'completed-tab')">Completed</div>
+            </div>
+            
+            <!-- Current Assignments Tab -->
+            <div id="current-tab" class="tab-content active">
+                <table class="assignments-table">
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>House</th>
+                            <th>Type</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ASG-001</td>
+                            <td>123 Main Street</td>
+                            <td>Inspection</td>
+                            <td>2023-06-20</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <button class="action-btn start-btn" onclick="viewAssignment('ASG-001')">
+                                    <i class="fas fa-play"></i> Start
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ASG-002</td>
+                            <td>456 Oak Avenue</td>
+                            <td>Maintenance</td>
+                            <td>2023-06-18</td>
+                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td>
+                                <button class="action-btn complete-btn" onclick="viewAssignment('ASG-002')">
+                                    <i class="fas fa-check"></i> Complete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Completed Assignments Tab -->
+            <div id="completed-tab" class="tab-content">
+                <table class="assignments-table">
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>House</th>
+                            <th>Type</th>
+                            <th>Completed Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ASG-003</td>
+                            <td>789 Pine Road</td>
+                            <td>Key Return</td>
+                            <td>2023-06-15</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>
+                                <button class="action-btn" onclick="viewAssignment('ASG-003')" style="background-color: #f0f0f0;">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Assignment Details Modal -->
+    <div class="modal" id="assignmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalAssignmentTitle">Assignment Details</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="assignmentDetails">
+                <!-- Details will be inserted here by JavaScript -->
+            </div>
+            <div class="update-status">
+                <h4>Update Status</h4>
+                <select class="status-select" id="statusUpdate">
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <textarea class="notes-input" id="statusNotes" placeholder="Add notes about this assignment..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" onclick="closeModal()" style="background-color: #f0f0f0;">Cancel</button>
+                <button class="action-btn" onclick="updateAssignment()" style="background-color: rgb(255, 165, 0); color: white;">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            const tabs = document.getElementsByClassName("tab");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('assignmentModal').style.display = 'none';
+        }
+        
+        // View assignment details
+        function viewAssignment(assignmentId) {
+            // In a real app, this would fetch assignment data from server
+            const assignmentData = {
+                'ASG-001': {
+                    title: 'House Inspection - 123 Main Street',
+                    house: '123 Main Street, Apartment 4B',
+                    type: 'Inspection',
+                    assignedBy: 'Supervisor Admin',
+                    dueDate: '2023-06-20',
+                    status: 'pending',
+                    description: 'Complete full inspection of the property including plumbing, electrical, and structural components.'
+                },
+                'ASG-002': {
+                    title: 'Maintenance - 456 Oak Avenue',
+                    house: '456 Oak Avenue',
+                    type: 'Maintenance',
+                    assignedBy: 'Supervisor Admin',
+                    dueDate: '2023-06-18',
+                    status: 'in-progress',
+                    description: 'Fix leaky faucet in kitchen and replace bathroom light fixtures.'
+                },
+                'ASG-003': {
+                    title: 'Key Return - 789 Pine Road',
+                    house: '789 Pine Road',
+                    type: 'Key Return',
+                    assignedBy: 'Supervisor Admin',
+                    dueDate: '2023-06-15',
+                    status: 'completed',
+                    description: 'Collect keys from guest and verify property condition.',
+                    completedDate: '2023-06-14',
+                    completedNotes: 'Keys returned in good condition. Property was clean with no issues.'
+                }
+            };
+            
+            const assignment = assignmentData[assignmentId];
+            
+            document.getElementById('modalAssignmentTitle').textContent = assignment.title;
+            
+            let detailsHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">House:</div>
+                    <div class="detail-value">${assignment.house}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Type:</div>
+                    <div class="detail-value">${assignment.type}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Assigned By:</div>
+                    <div class="detail-value">${assignment.assignedBy}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Due Date:</div>
+                    <div class="detail-value">${assignment.dueDate}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Description:</div>
+                    <div class="detail-value">${assignment.description}</div>
+                </div>
+            `;
+            
+            if (assignment.status === 'completed') {
+                detailsHTML += `
+                    <div class="detail-row">
+                        <div class="detail-label">Completed Date:</div>
+                        <div class="detail-value">${assignment.completedDate}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Completion Notes:</div>
+                        <div class="detail-value">${assignment.completedNotes}</div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('assignmentDetails').innerHTML = detailsHTML;
+            document.getElementById('statusUpdate').value = assignment.status;
+            document.getElementById('statusNotes').value = assignment.status === 'completed' ? assignment.completedNotes : '';
+            
+            openModal('assignmentModal');
+        }
+        
+        // Update assignment status
+        function updateAssignment() {
+            const newStatus = document.getElementById('statusUpdate').value;
+            const notes = document.getElementById('statusNotes').value;
+            
+            // In a real app, this would send data to server
+            alert(`Assignment status updated to ${newStatus} with notes: ${notes}`);
+            closeModal();
+            // Refresh the assignments list
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.className === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
