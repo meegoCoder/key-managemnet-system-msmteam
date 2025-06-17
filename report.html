@@ -1,186 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MSM Team</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f1f3;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #444;
-      color: white;
-      padding: 10px 20px;
-    }
-
-    .logo {
-      background-color: #f9955c;
-      padding: 5px 15px;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-    }
-
-    .nav a {
-      color: white;
-      text-decoration: none;
-      margin-right: 15px;
-    }
-
-    .nav input {
-      padding: 5px;
-    }
-
-    .container {
-      padding: 30px;
-      display: flex;
-      gap: 30px;
-    }
-
-    .left-panel, .report-box, .key-grid {
-      background-color: white;
-      border-radius: 10px;
-      padding: 20px;
-    }
-
-    .left-panel {
-      width: 200px;
-    }
-
-    .left-panel div {
-      background-color: #f1f1f1;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-    }
-
-    .report-box {
-      flex: 1;
-      color: black;
-    }
-
-    .report-box h3 {
-      text-align: center;
-      color: #f9955c;
-    }
-
-    .report-box table {
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    .report-box th, .report-box td {
-      text-align: left;
-      padding: 5px;
-    }
-
-    .back-btn {
-      margin: 20px 30px;
-      cursor: pointer;
-      font-size: 24px;
-    }
-
-    .key-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .key-button {
-      background-color: #f9955c;
-      border: none;
-      padding: 15px;
-      border-radius: 15px;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .note {
-      color: red;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Reports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 80px 1fr;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .home-btn {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: rgba(255, 165, 0, 0.8);
+        }
+        
+        .system-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            margin-left: -5px;
+            cursor: pointer;
+        }
+        
+        /* Sidebar Styles */
+        aside {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgb(120, 120, 120);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h2 {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 10px;
+            color: rgb(255, 165, 0);
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: rgb(255, 165, 0);
+            border-left: 4px solid rgb(255, 165, 0);
+        }
+        
+        /* Main Content Styles */
+        main {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        /* Report Page Styles */
+        .report-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            color: rgb(255, 165, 0);
+            font-size: 24px;
+        }
+        
+        .report-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .report-type {
+            flex: 1;
+        }
+        
+        .report-type select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .date-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .date-range input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .generate-btn {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .generate-btn:hover {
+            background-color: rgba(255, 165, 0, 0.8);
+        }
+        
+        .export-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .export-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        /* Report Table Styles */
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .report-table th, 
+        .report-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .report-table th {
+            background-color: rgb(90, 90, 90);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .report-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-occupied {
+            background-color: #fff1f0;
+            color: #f5222d;
+        }
+        
+        .status-vacant {
+            background-color: #e6f7ee;
+            color: #00a854;
+        }
+        
+        .status-maintenance {
+            background-color: #fff7e6;
+            color: #fa8c16;
+        }
+        
+        .key-returned {
+            color: #00a854;
+            font-weight: 600;
+        }
+        
+        .key-not-returned {
+            color: #f5222d;
+            font-weight: 600;
+        }
+        
+        /* Report Summary */
+        .report-summary {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid rgb(255, 165, 0);
+        }
+        
+        .summary-title {
+            color: rgb(255, 165, 0);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(90, 90, 90);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search reports...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="#"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="#"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="#"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="#"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="#" class="active"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="#"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="report-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-chart-bar"></i> Key Assignment Reports</h1>
+            </div>
+            
+            <div class="report-controls">
+                <div class="report-type">
+                    <select id="reportType">
+                        <option value="all">All Key Assignments</option>
+                        <option value="current">Current Assignments</option>
+                        <option value="completed">Completed Assignments</option>
+                        <option value="overdue">Overdue Key Returns</option>
+                    </select>
+                </div>
+                
+                <div class="date-range">
+                    <label>From:</label>
+                    <input type="date" id="startDate">
+                    <label>To:</label>
+                    <input type="date" id="endDate">
+                </div>
+                
+                <button class="generate-btn" id="generateReport">
+                    <i class="fas fa-sync-alt"></i> Generate
+                </button>
+                
+                <button class="export-btn">
+                    <i class="fas fa-file-export"></i> Export
+                </button>
+            </div>
+            
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Key ID</th>
+                        <th>House Unit</th>
+                        <th>Guest Name</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                        <th>Staff ID</th>
+                        <th>Staff Name</th>
+                        <th>Staff Role</th>
+                        <th>House Status</th>
+                        <th>Key Returned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>KEY-001</td>
+                        <td>123 Main St, Apt 4B</td>
+                        <td>John Smith</td>
+                        <td>2023-06-10</td>
+                        <td>2023-06-17</td>
+                        <td>STF-001</td>
+                        <td>Michael Johnson</td>
+                        <td>Front Desk</td>
+                        <td><span class="status-badge status-occupied">Occupied</span></td>
+                        <td class="key-not-returned">No</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-002</td>
+                        <td>456 Oak Ave</td>
+                        <td>Sarah Williams</td>
+                        <td>2023-06-05</td>
+                        <td>2023-06-12</td>
+                        <td>STF-002</td>
+                        <td>Emily Davis</td>
+                        <td>Concierge</td>
+                        <td><span class="status-badge status-vacant">Vacant</span></td>
+                        <td class="key-returned">Yes (2023-06-12)</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-003</td>
+                        <td>789 Pine Rd</td>
+                        <td>Robert Brown</td>
+                        <td>2023-06-15</td>
+                        <td>2023-06-22</td>
+                        <td>STF-003</td>
+                        <td>David Wilson</td>
+                        <td>Manager</td>
+                        <td><span class="status-badge status-occupied">Occupied</span></td>
+                        <td class="key-not-returned">No</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-004</td>
+                        <td>321 Elm St</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>STF-004</td>
+                        <td>Jessica Lee</td>
+                        <td>Maintenance</td>
+                        <td><span class="status-badge status-maintenance">Maintenance</span></td>
+                        <td class="key-returned">Yes (2023-06-08)</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-005</td>
+                        <td>654 Maple Dr</td>
+                        <td>Lisa Taylor</td>
+                        <td>2023-06-01</td>
+                        <td>2023-06-08</td>
+                        <td>STF-001</td>
+                        <td>Michael Johnson</td>
+                        <td>Front Desk</td>
+                        <td><span class="status-badge status-vacant">Vacant</span></td>
+                        <td class="key-returned">Yes (2023-06-08)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="report-summary">
+                <h3 class="summary-title"><i class="fas fa-chart-pie"></i> Report Summary</h3>
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Total Assignments</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Keys Returned</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Keys Outstanding</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Overdue Returns</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-  <header>
-    <div class="logo">MSM TEAM</div>
-    <div class="nav">
-      <a href="#">HOME</a>
-      <input type="text" placeholder="Search...">
-    </div>
-  </header>
-
-  <div class="back-btn">&#8592;</div>
-
-  <div class="container">
-    <div class="left-panel">
-      <div>Report ID: RP7821</div>
-      <div>Report Name: Key Usage</div>
-      <div>Key ID: KY21</div>
-    </div>
-
-    <div class="report-box">
-      <h3>Report Details</h3>
-      <table>
-        <tr>
-          <th>Date</th>
-          <th>Info</th>
-        </tr>
-        <tr>
-          <td>12/2/23</td>
-          <td>Guest Checked Out</td>
-        </tr>
-        <tr>
-          <td>13/2/23</td>
-          <td>Key Assigned to Inspector</td>
-        </tr>
-        <tr>
-          <td>15/2/23</td>
-          <td>Key Assigned to Maintenance Staff</td>
-        </tr>
-      </table>
-      <br>
-      <strong>Staff In Charge</strong>
-      <ul>
-        <li>Fazura Binti Hashim, EL420</li>
-        <li>Anas Bin Mikalil, EL372</li>
-      </ul>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="back-btn">&#8592;</div>
-
-  <div class="container">
-    <div class="key-grid">
-      <button class="key-button">KY21</button>
-      <button class="key-button">KY24</button>
-      <button class="key-button">KY27</button>
-      <button class="key-button">KY22</button>
-      <button class="key-button">KY25</button>
-      <button class="key-button">KY28</button>
-      <button class="key-button">KY23</button>
-      <button class="key-button">KY26</button>
-      <button class="key-button">KY29</button>
-    </div>
-  </div>
-  <div class="note" style="margin-left: 30px;">*Click key button to view report</div>
-
+    <script>
+        // Set default dates
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const oneMonthAgo = new Date();
+            oneMonthAgo.setMonth(today.getMonth() - 1);
+            
+            document.getElementById('startDate').valueAsDate = oneMonthAgo;
+            document.getElementById('endDate').valueAsDate = today;
+            
+            // Generate report on page load
+            generateReport();
+        });
+        
+        // Generate report function
+        document.getElementById('generateReport').addEventListener('click', generateReport);
+        
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            // In a real application, this would fetch data from the server
+            // based on the selected filters
+            console.log(`Generating ${reportType} report from ${startDate} to ${endDate}`);
+            
+            // Here we would update the table with the filtered data
+            // For this demo, we're just showing all data
+        }
+        
+        // Export function
+        document.querySelector('.export-btn').addEventListener('click', function() {
+            // In a real application, this would export the current report
+            // to CSV, PDF, or Excel format
+            alert('Exporting current report...');
+        });
+    </script>
 </body>
 </html>

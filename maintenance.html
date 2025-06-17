@@ -1,96 +1,695 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inspection List</title>
-  <link rel="stylesheet" href="css/maintenance.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Maintenance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 80px 1fr;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header Styles */
+        header {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .home-btn {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: rgba(255, 165, 0, 0.8);
+        }
+        
+        .system-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background-color: rgb(255, 165, 0);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            margin-left: -5px;
+            cursor: pointer;
+        }
+        
+        /* Sidebar Styles */
+        aside {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+            background-color: rgb(90, 90, 90);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgb(120, 120, 120);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h2 {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 10px;
+            color: rgb(255, 165, 0);
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: rgb(255, 165, 0);
+            border-left: 4px solid rgb(255, 165, 0);
+        }
+        
+        /* Main Content Styles */
+        main {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        /* Maintenance Page Styles */
+        .maintenance-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            color: rgb(255, 165, 0);
+            font-size: 24px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .new-maintenance-btn {
+            background-color: rgb(255, 165, 0);
+            color: white;
+        }
+        
+        .new-maintenance-btn:hover {
+            background-color: rgba(255, 165, 0, 0.8);
+        }
+        
+        /* Maintenance Table Styles */
+        .maintenance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .maintenance-table th, 
+        .maintenance-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .maintenance-table th {
+            background-color: rgb(90, 90, 90);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .maintenance-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .maintenance-table .actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .table-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .edit-btn {
+            background-color: #fff7e6;
+            color: #fa8c16;
+        }
+        
+        .delete-btn {
+            background-color: #fff1f0;
+            color: #f5222d;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff7e6;
+            color: #fa8c16;
+        }
+        
+        .status-in-progress {
+            background-color: #e6f7ff;
+            color: #1890ff;
+        }
+        
+        .status-completed {
+            background-color: #e6f7ee;
+            color: #00a854;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 600px;
+            max-width: 90%;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            color: rgb(255, 165, 0);
+            font-size: 20px;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Form Styles */
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .cancel-btn {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .save-btn {
+            background-color: rgb(255, 165, 0);
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <header>
-    <div class="logo">MSM TEAM</div>
-    <nav>
-      <a href="#">HOME</a>
-      <input type="text" class="search-box" placeholder="Search...">
-      🔍
-    </nav>
-  </header>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search maintenance tasks...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="#"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="#"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="#"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="#" class="active"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="#"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="#"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="maintenance-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-tools"></i> Maintenance Assignments</h1>
+                <div class="action-buttons">
+                    <button class="action-btn new-maintenance-btn" id="newMaintenanceBtn">
+                        <i class="fas fa-plus"></i> New Assignment
+                    </button>
+                </div>
+            </div>
+            
+            <table class="maintenance-table">
+                <thead>
+                    <tr>
+                        <th>Task ID</th>
+                        <th>House</th>
+                        <th>Assigned To</th>
+                        <th>Issue Type</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MTN-001</td>
+                        <td>123 Main Street</td>
+                        <td>John Smith</td>
+                        <td>Plumbing</td>
+                        <td>2023-06-20</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-001')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-001')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MTN-002</td>
+                        <td>456 Oak Avenue</td>
+                        <td>Sarah Johnson</td>
+                        <td>Electrical</td>
+                        <td>2023-06-18</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-002')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-002')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MTN-003</td>
+                        <td>789 Pine Road</td>
+                        <td>Michael Brown</td>
+                        <td>HVAC</td>
+                        <td>2023-06-15</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-003')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-003')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MTN-004</td>
+                        <td>321 Elm Street</td>
+                        <td>David Wilson</td>
+                        <td>Structural</td>
+                        <td>2023-06-12</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-004')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-004')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
-  <a class="back-arrow" href="#">←</a>
+    <!-- Maintenance Assignment Modal -->
+    <div class="modal" id="maintenanceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle"><i class="fas fa-plus"></i> New Maintenance Assignment</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="maintenanceAssignmentForm">
+                    <input type="hidden" id="taskId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="house">House</label>
+                            <select id="house" required>
+                                <option value="">Select House</option>
+                                <option value="H001">123 Main Street</option>
+                                <option value="H002">456 Oak Avenue</option>
+                                <option value="H003">789 Pine Road</option>
+                                <option value="H004">321 Elm Street</option>
+                                <option value="H005">654 Maple Drive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignedTo">Assign To</label>
+                            <select id="assignedTo" required>
+                                <option value="">Select Staff</option>
+                                <option value="S001">John Smith (Plumber)</option>
+                                <option value="S002">Sarah Johnson (Electrician)</option>
+                                <option value="S003">Michael Brown (HVAC)</option>
+                                <option value="S004">David Wilson (General Maintenance)</option>
+                                <option value="S005">Emily Davis (Carpenter)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="issueType">Issue Type</label>
+                            <select id="issueType" required>
+                                <option value="">Select Issue Type</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="hvac">HVAC</option>
+                                <option value="structural">Structural</option>
+                                <option value="appliance">Appliance</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">Priority</label>
+                            <select id="priority" required>
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="emergency">Emergency</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dueDate">Due Date</label>
+                            <input type="date" id="dueDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" required>
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="issueDescription">Issue Description</label>
+                        <textarea id="issueDescription" placeholder="Describe the maintenance issue in detail" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-btn cancel-btn" onclick="closeModal()">Cancel</button>
+                <button type="button" class="action-btn save-btn" onclick="saveMaintenance()">Save Assignment</button>
+            </div>
+        </div>
+    </div>
 
-  <div class="table-container">
-    <h3>List of Inspection</h3>
-    <table>
-      <tr>
-        <th>#</th>
-        <th>Key ID</th>
-        <th>Check-Out Date</th>
-        <th>Staff Name</th>
-        <th>Staff ID</th>
-        <th>To-Do</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>1.</td>
-        <td><a class="link" href="#">K21</a></td>
-        <td>17/2/25</td>
-        <td>Anas</td>
-        <td>BL372</td>
-        <td>Maintenance</td>
-        <td>
-          <select class="dropdown">
-            <option>Undone</option>
-            <option>Pending</option>
-            <option>Done</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>2.</td>
-        <td><a class="link" href="#">K24</a></td>
-        <td>17/2/25</td>
-        <td>Anas</td>
-        <td>BL372</td>
-        <td>Maintenance</td>
-        <td>
-          <select class="dropdown">
-            <option>Pending</option>
-            <option>Done</option>
-            <option>Undone</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>3.</td>
-        <td><a class="link" href="#">K29</a></td>
-        <td>17/2/25</td>
-        <td>Nadzrep</td>
-        <td>BL516</td>
-        <td>Maintenance</td>
-        <td>
-          <select class="dropdown">
-            <option>Done</option>
-            <option>Undone</option>
-            <option>Pending</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>4.</td>
-        <td><a class="link" href="#">K22</a></td>
-        <td>12/2/25</td>
-        <td>Irfan</td>
-        <td>BL181</td>
-        <td>Maintenance</td>
-        <td>
-          <select class="dropdown">
-            <option>Done</option>
-            <option>Undone</option>
-            <option>Pending</option>
-          </select>
-        </td>
-      </tr>
-    </table>
-  </div>
+    <script>
+        // Current maintenance task being edited
+        let currentMaintenance = null;
+        
+        // Open modal for new maintenance task
+        document.getElementById('newMaintenanceBtn').addEventListener('click', function() {
+            currentMaintenance = null;
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> New Maintenance Assignment';
+            document.getElementById('maintenanceAssignmentForm').reset();
+            document.getElementById('taskId').value = '';
+            document.getElementById('status').value = 'pending';
+            document.getElementById('dueDate').valueAsDate = new Date();
+            openModal('maintenanceModal');
+        });
+        
+        // Edit maintenance function
+        function editMaintenance(taskId) {
+            // In a real app, this would fetch maintenance data from server
+            const maintenanceData = {
+                'MTN-001': {
+                    house: 'H001',
+                    assignedTo: 'S001',
+                    issueType: 'plumbing',
+                    priority: 'medium',
+                    dueDate: '2023-06-20',
+                    status: 'pending',
+                    description: 'Fix leaky faucet in kitchen'
+                },
+                'MTN-002': {
+                    house: 'H002',
+                    assignedTo: 'S002',
+                    issueType: 'electrical',
+                    priority: 'high',
+                    dueDate: '2023-06-18',
+                    status: 'in-progress',
+                    description: 'Replace faulty wiring in living room'
+                },
+                'MTN-003': {
+                    house: 'H003',
+                    assignedTo: 'S003',
+                    issueType: 'hvac',
+                    priority: 'medium',
+                    dueDate: '2023-06-15',
+                    status: 'completed',
+                    description: 'Service AC unit and replace filters'
+                },
+                'MTN-004': {
+                    house: 'H004',
+                    assignedTo: 'S004',
+                    issueType: 'structural',
+                    priority: 'medium',
+                    dueDate: '2023-06-12',
+                    status: 'completed',
+                    description: 'Repair cracked drywall in hallway'
+                }
+            };
+            
+            currentMaintenance = taskId;
+            const task = maintenanceData[taskId];
+            
+            document.getElementById('modalTitle').innerHTML = `<i class="fas fa-edit"></i> Edit Maintenance ${taskId}`;
+            document.getElementById('taskId').value = taskId;
+            document.getElementById('house').value = task.house;
+            document.getElementById('assignedTo').value = task.assignedTo;
+            document.getElementById('issueType').value = task.issueType;
+            document.getElementById('priority').value = task.priority;
+            document.getElementById('dueDate').value = task.dueDate;
+            document.getElementById('status').value = task.status;
+            document.getElementById('issueDescription').value = task.description;
+            
+            openModal('maintenanceModal');
+        }
+        
+        // Delete maintenance function
+        function deleteMaintenance(taskId) {
+            if (confirm(`Are you sure you want to delete maintenance task ${taskId}? This action cannot be undone.`)) {
+                // In a real app, this would delete from server
+                alert(`Maintenance task ${taskId} has been deleted.`);
+                // Refresh the maintenance list
+            }
+        }
+        
+        // Save maintenance function
+        function saveMaintenance() {
+            const form = document.getElementById('maintenanceAssignmentForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const taskId = document.getElementById('taskId').value;
+            const isNew = !taskId;
+            
+            // In a real app, this would save to server
+            if (isNew) {
+                alert('New maintenance assignment created successfully!');
+            } else {
+                alert(`Maintenance task ${taskId} updated successfully!`);
+            }
+            
+            closeModal();
+            // Refresh the maintenance list
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('maintenanceModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.className === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
